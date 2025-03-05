@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="ChatApp_WPF.MainTabs.ProfileTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChatApp_WPF.MainTabs"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid Margin="100,50" Background="Gray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0">
+                <TextBlock Text="暱稱" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="0">
+                <TextBlock Text="年齡" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="0">
+                <TextBlock Text="體重" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            </Grid>
+            <Grid Grid.Row="3" Grid.Column="0">
+                <TextBlock Text="身高" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            </Grid>
+            <Grid Grid.Row="4" Grid.Column="0">
+                <TextBlock Text="自介" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="1">
+                <TextBox Text="{Binding personalProfile.Name, UpdateSourceTrigger=LostFocus}"></TextBox>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <TextBox Text="{Binding personalProfile.Age, UpdateSourceTrigger=LostFocus}"></TextBox>
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="1">
+                <TextBox Text="{Binding personalProfile.Weight,UpdateSourceTrigger=LostFocus}"></TextBox>
+            </Grid>
+            <Grid Grid.Row="3" Grid.Column="1">
+                <TextBox Text="{Binding personalProfile.Height,UpdateSourceTrigger=LostFocus}"></TextBox>
+            </Grid>
+            <Grid Grid.Row="4" Grid.Column="1">
+                <TextBox Text="{Binding personalProfile.Description,UpdateSourceTrigger=LostFocus}"></TextBox>
+            </Grid>
+            <Grid Grid.Row="5" Grid.Column="1">
+                <Button Content="SAVE"></Button>
+            </Grid>
+            <Grid Grid.Row="5" Grid.Column="0">
+                <UniformGrid Columns="2">
+                    <Button Content="Import"></Button>
+                    <Button Content="Export"></Button>
+                </UniformGrid>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

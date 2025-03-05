@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="ChatApp_WPF.MainTabs.ChatTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChatApp_WPF.MainTabs"
+             xmlns:stylesetup ="clr-namespace:ChatApp_WPF.Viewmodel.TabVM"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <stylesetup:BoolToColumnConverter x:Key="BoolToColumnConverter"/>
+        <stylesetup:MessageAlignmentConverter x:Key="MessageAlignmentConverter"/>
+        <stylesetup:MessageBackgroundConverter x:Key="MessageBackgroundConverter"/>
+    </UserControl.Resources>
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <ItemsControl ItemsSource="{Binding ChatHistory}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel VerticalAlignment="Top"/>
+                        <!-- 避免默认 ListBox 的虚拟化问题 -->
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <!-- 绑定 Grid.Column 让消息自动对齐 -->
+                            <Border Background="{Binding IsMine, Converter={StaticResource MessageBackgroundConverter}}"
+                        Padding="10" CornerRadius="10"
+                        Grid.Column="{Binding IsMine, Converter={StaticResource BoolToColumnConverter}}"
+                        MaxWidth="300">
+                                <StackPanel HorizontalAlignment="{Binding IsMine, Converter={StaticResource MessageAlignmentConverter}}">
+                                    <TextBlock Text="{Binding Message}" Padding="5" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Button Content="Quit" Command="{Binding Quit}" Margin="5">
+                    
+                </Button>
+            </Grid>
+            <Grid Grid.Column="1">
+                <TextBox Text="{Binding Message,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5">
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding SendMessageCommand}" />
+                    </TextBox.InputBindings>
+                </TextBox>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Button Content="Send" Command="{Binding SendMessageCommand}" Margin="5"  />
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
